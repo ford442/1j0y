@@ -3,9 +3,6 @@
 
 EM_BOOL gamepad_callback(int eventType, const EmscriptenGamepadEvent *e, void *userData)
 {
-  printf("%s: timeStamp: %g, connected: %d, index: %ld, numAxes: %d, numButtons: %d, id: \"%s\", mapping: \"%s\"\n",
-    eventType != 0 ? emscripten_event_type_to_string(eventType) : "Gamepad state", e->timestamp, e->connected, e->index, 
-    e->numAxes, e->numButtons, e->id, e->mapping);
 
   if (e->connected)
   {
