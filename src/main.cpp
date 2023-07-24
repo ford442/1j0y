@@ -1,4 +1,5 @@
 #include "../include/main.hpp"
+#include <stdio.h>
 
 
 EM_BOOL gamepad_callback(int eventType, const EmscriptenGamepadEvent *e, void *userData)
