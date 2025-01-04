@@ -1,19 +1,15 @@
 #include "../include/main.hpp"
 #include <stdio.h>
 
-
 EM_BOOL gamepad_callback(int eventType, const EmscriptenGamepadEvent *e, void *userData)
 {
-
   if (e->connected)
   {
     for(int i = 0; i < e->numAxes; ++i)
       printf("Axis %d: %g\n", i, e->axis[i]);
-
     for(int i = 0; i < e->numButtons; ++i)
       printf("Button %d: Digital: %d, Analog: %g\n", i, e->digitalButton[i], e->analogButton[i]);
   }
-
   return 0;
 }
 
@@ -29,14 +25,12 @@ void mainloop()
     emscripten_cancel_main_loop();
     return;
   }
-
   int numGamepads = emscripten_get_num_gamepads();
   if (numGamepads != prevNumGamepads)
   {
     printf("Number of connected gamepads: %d\n", numGamepads);
     prevNumGamepads = numGamepads;
   }
-
   for(int i = 0; i < numGamepads && i < 32; ++i)
   {
     EmscriptenGamepadEvent ge;
@@ -58,9 +52,7 @@ void mainloop()
           document.querySelector('#axis1').innerHTML=$1;
           }
           }, j, ge.axis[j]);
-        
-      }
-
+              }
       for(int j = 0; j < ge.numButtons; ++j)
       {
         if (ge.analogButton[j] != prevState[g].analogButton[j] || ge.digitalButton[j] != prevState[g].digitalButton[j])
@@ -104,6 +96,7 @@ void mainloop()
 EM_JS(void,js_main,(),{
 
 "use strict";
+  
 const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
 
 function categorizeValue(elementValue) {
@@ -146,7 +139,7 @@ ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
 button1.addEventListener('onchange',function(){
 var btn = categorizeValue(button1.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
-}
+});
 button2.addEventListener('onchange',function(){
 var btn = categorizeValue(button2.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 2, value: btn }));
