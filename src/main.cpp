@@ -89,7 +89,7 @@ void mainloop()
           if ($1===1){
           document.querySelector('#button6').innerHTML=$1;
           }
-          if ($1==88888=1){
+          if ($1===1){
           document.querySelector('#button7').innerHTML=$1;
           }
           }, j, ge.analogButton[j]);
