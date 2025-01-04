@@ -54,6 +54,14 @@ void mainloop()
       {
         if (ge.analogButton[j] != prevState[g].analogButton[j] || ge.digitalButton[j] != prevState[g].digitalButton[j])
           printf("Gamepad %d, button %d: Digital: %d, Analog: %g\n", g, j, ge.digitalButton[j], ge.analogButton[j]);
+          
+                EM_ASM({
+                console.log('websocket sends: ',i,' pressed.');
+          // Send button press event to Node.js server using WebSockets
+          const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
+          ws.send(JSON.stringify({ type: 'button', index: $0, pressed: true })); 
+        }, i); // Pass the button index (i) to the JavaScript code
+      
       }
       prevState[g] = ge;
     }
@@ -65,38 +73,6 @@ EM_JS(void,js_main,(),{
 
 "use strict";
 
-  // Create a WebSocket connection to the Node.js server
-const ws = new WebSocket('ws://localhost:3000');
-
-// Function to handle gamepad events
-function handleGamepadEvent(event) {
-  const gamepad = event.gamepad;
-
-  // Process buttons
-  for (let i = 0; i < gamepad.buttons.length; i++) {
-    const button = gamepad.buttons[i];
-    if (button.pressed) {
-      console.log('websocket sends: ',i,' pressed.');
-      ws.send(JSON.stringify({ type: 'button', index: i, pressed: true }));
-    } else if (button.released) {
-      ws.send(JSON.stringify({ type: 'button', index: i, pressed: false }));
-    }
-  }
-
-  // Process joysticks
-  for (let i = 0; i < gamepad.axes.length; i++) {
-    const axis = gamepad.axes[i];
-    if (Math.abs(axis) > 0.5) {
-      ws.send(JSON.stringify({ type: 'joystick', index: i, value: axis }));
-    }
-  }
-}
-
-// Register gamepad event listener
-window.addEventListener('gamepadconnected', event => {
-  event.gamepad.addEventListener('buttons', handleGamepadEvent);
-  event.gamepad.addEventListener('axes', handleGamepadEvent);
-});
 
 function normalResStart(){
 
