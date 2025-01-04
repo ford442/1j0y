@@ -77,6 +77,7 @@ function handleGamepadEvent(event) {
   for (let i = 0; i < gamepad.buttons.length; i++) {
     const button = gamepad.buttons[i];
     if (button.pressed) {
+      console.log('websocket sends: ',i,' pressed.');
       ws.send(JSON.stringify({ type: 'button', index: i, pressed: true }));
     } else if (button.released) {
       ws.send(JSON.stringify({ type: 'button', index: i, pressed: false }));
