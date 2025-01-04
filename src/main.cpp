@@ -56,7 +56,7 @@ void mainloop()
           printf("Gamepad %d, button %d: Digital: %d, Analog: %g\n", g, j, ge.digitalButton[j], ge.analogButton[j]);
           
                 EM_ASM({
-                console.log('websocket sends: ',i,' pressed.');
+                console.log('websocket sends: ',$0,' pressed.');
           // Send button press event to Node.js server using WebSockets
           const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
           ws.send(JSON.stringify({ type: 'button', index: $0, pressed: true })); 
