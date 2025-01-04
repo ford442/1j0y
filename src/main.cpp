@@ -104,6 +104,73 @@ void mainloop()
 EM_JS(void,js_main,(),{
 
 "use strict";
+const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
+
+function categorizeValue(elementValue) {
+  const num = parseFloat(elementValue);
+  if (Math.abs(num - (-1)) < 0.05) {  // Check for "near -1"
+    return -1;
+  } else if (Math.abs(num) < 0.05) {  // Check for "near 0"
+    return 0;
+  } else if (Math.abs(num - 1) < 0.05) {  // Check for "near 1"
+    return 1;
+  } else {
+    return null; // Or handle other cases as needed
+  }
+}
+
+const axis0 = document.querySelector('#axis0');
+const axis1 = document.querySelector('#axis1');
+
+const button0 = document.querySelector('#button0');
+const button1 = document.querySelector('#button1');
+const button2 = document.querySelector('#button2');
+const button3 = document.querySelector('#button3');
+const button4 = document.querySelector('#button4');
+const button5 = document.querySelector('#button5');
+const button6 = document.querySelector('#button6');
+const button7 = document.querySelector('#button7');
+
+axis0.addEventListener('onchange',function(){
+var axi = categorizeValue(axis0.innerHTML);
+ws.send(JSON.stringify({ type: 'joystick', index: 0, value: axi }));
+}
+axis1.addEventListener('onchange',function(){
+var axi = categorizeValue(axis1.innerHTML);
+ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
+}
+button0.addEventListener('onchange',function(){
+var btn = categorizeValue(button0.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
+}
+button1.addEventListener('onchange',function(){
+var btn = categorizeValue(button1.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
+}
+button2.addEventListener('onchange',function(){
+var btn = categorizeValue(button2.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 2, value: btn }));
+}
+button3.addEventListener('onchange',function(){
+var btn = categorizeValue(button3.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 3, value: btn }));
+}
+button4.addEventListener('onchange',function(){
+var btn = categorizeValue(button4.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 4, value: btn }));
+}
+button5.addEventListener('onchange',function(){
+var btn = categorizeValue(button5.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 5, value: btn }));
+}
+button6.addEventListener('onchange',function(){
+var btn = categorizeValue(button6.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 6, value: btn }));
+}
+button7.addEventListener('onchange',function(){
+var btn = categorizeValue(button7.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
+}
 
 function normalResStart(){
 
