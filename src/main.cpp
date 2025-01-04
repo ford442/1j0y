@@ -125,6 +125,7 @@ const button6 = document.querySelector('#button6');
 const button7 = document.querySelector('#button7');
 
 axis0.addEventListener('onchange',function(){
+  console.log('axis');
 var axi = categorizeValue(axis0.innerHTML);
 ws.send(JSON.stringify({ type: 'joystick', index: 0, value: axi }));
 });
