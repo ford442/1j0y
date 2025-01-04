@@ -65,8 +65,7 @@ EM_JS(void,js_main,(),{
 
 "use strict";
 
-function normalResStart(){
-// Create a WebSocket connection to the Node.js server
+  // Create a WebSocket connection to the Node.js server
 const ws = new WebSocket('ws://localhost:3000');
 
 // Function to handle gamepad events
@@ -98,6 +97,9 @@ window.addEventListener('gamepadconnected', event => {
   event.gamepad.addEventListener('buttons', handleGamepadEvent);
   event.gamepad.addEventListener('axes', handleGamepadEvent);
 });
+
+function normalResStart(){
+
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
