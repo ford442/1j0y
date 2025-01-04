@@ -66,7 +66,37 @@ EM_JS(void,js_main,(),{
 "use strict";
 
 function normalResStart(){
+// Create a WebSocket connection to the Node.js server
+const ws = new WebSocket('ws://localhost:3000');
 
+// Function to handle gamepad events
+function handleGamepadEvent(event) {
+  const gamepad = event.gamepad;
+
+  // Process buttons
+  for (let i = 0; i < gamepad.buttons.length; i++) {
+    const button = gamepad.buttons[i];
+    if (button.pressed) {
+      ws.send(JSON.stringify({ type: 'button', index: i, pressed: true }));
+    } else if (button.released) {
+      ws.send(JSON.stringify({ type: 'button', index: i, pressed: false }));
+    }
+  }
+
+  // Process joysticks
+  for (let i = 0; i < gamepad.axes.length; i++) {
+    const axis = gamepad.axes[i];
+    if (Math.abs(axis) > 0.5) {
+      ws.send(JSON.stringify({ type: 'joystick', index: i, value: axis }));
+    }
+  }
+}
+
+// Register gamepad event listener
+window.addEventListener('gamepadconnected', event => {
+  event.gamepad.addEventListener('buttons', handleGamepadEvent);
+  event.gamepad.addEventListener('axes', handleGamepadEvent);
+});
 }
   
 document.getElementById('pmhig').innerHTML=parseInt(window.innerHeight,10);
@@ -109,8 +139,8 @@ tem.innerHTML=$ll;
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);
-},16)
-;});
+},16);
+});
 
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
