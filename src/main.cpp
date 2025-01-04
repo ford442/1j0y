@@ -74,22 +74,22 @@ void mainloop()
           if ($0===1){
           document.querySelector('#button1').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===2){
           document.querySelector('#button2').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===3){
           document.querySelector('#button3').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===4){
           document.querySelector('#button4').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===5){
           document.querySelector('#button5').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===6){
           document.querySelector('#button6').innerHTML=$1;
           }
-          if ($0===1){
+          if ($0===7){
           document.querySelector('#button7').innerHTML=$1;
           }
           }, j, ge.analogButton[j]);
