@@ -47,9 +47,11 @@ void mainloop()
         EM_ASM({
           if ($0===0){
           document.querySelector('#axis0').innerHTML=$1;
+          document.querySelector('#axis0').click();
           }
           if ($0===1){
           document.querySelector('#axis1').innerHTML=$1;
+          document.querySelector('#axis1').click();
           }
           }, j, ge.axis[j]);
               }
@@ -62,27 +64,35 @@ void mainloop()
           EM_ASM({
           if ($0===0){
           document.querySelector('#button0').innerHTML=$1;
+          document.querySelector('#button0').click();
           }
           if ($0===1){
           document.querySelector('#button1').innerHTML=$1;
+          document.querySelector('#button1').click();
           }
           if ($0===2){
           document.querySelector('#button2').innerHTML=$1;
+          document.querySelector('#button2').click();
           }
           if ($0===3){
           document.querySelector('#button3').innerHTML=$1;
+          document.querySelector('#button3').click();
           }
           if ($0===4){
           document.querySelector('#button4').innerHTML=$1;
+          document.querySelector('#button4').click();
           }
           if ($0===5){
           document.querySelector('#button5').innerHTML=$1;
+          document.querySelector('#button5').click();
           }
           if ($0===6){
           document.querySelector('#button6').innerHTML=$1;
+          document.querySelector('#button6').click();
           }
           if ($0===7){
           document.querySelector('#button7').innerHTML=$1;
+          document.querySelector('#button7').click();
           }
           }, j, ge.analogButton[j]);
         
@@ -124,44 +134,43 @@ const button5 = document.querySelector('#button5');
 const button6 = document.querySelector('#button6');
 const button7 = document.querySelector('#button7');
 
-axis0.addEventListener('onchange',function(){
-  console.log('axis');
+axis0.addEventListener('click',function(){
 var axi = categorizeValue(axis0.innerHTML);
 ws.send(JSON.stringify({ type: 'joystick', index: 0, value: axi }));
 });
-axis1.addEventListener('onchange',function(){
+axis1.addEventListener('click',function(){
 var axi = categorizeValue(axis1.innerHTML);
 ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
 });
-button0.addEventListener('onchange',function(){
+button0.addEventListener('click',function(){
 var btn = categorizeValue(button0.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
 });
-button1.addEventListener('onchange',function(){
+button1.addEventListener('click',function(){
 var btn = categorizeValue(button1.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
 });
-button2.addEventListener('onchange',function(){
+button2.addEventListener('click',function(){
 var btn = categorizeValue(button2.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 2, value: btn }));
 });
-button3.addEventListener('onchange',function(){
+button3.addEventListener('click',function(){
 var btn = categorizeValue(button3.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 3, value: btn }));
 });
-button4.addEventListener('onchange',function(){
+button4.addEventListener('click',function(){
 var btn = categorizeValue(button4.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 4, value: btn }));
 });
-button5.addEventListener('onchange',function(){
+button5.addEventListener('click',function(){
 var btn = categorizeValue(button5.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 5, value: btn }));
 });
-button6.addEventListener('onchange',function(){
+button6.addEventListener('click',function(){
 var btn = categorizeValue(button6.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 6, value: btn }));
 });
-button7.addEventListener('onchange',function(){
+button7.addEventListener('click',function(){
 var btn = categorizeValue(button7.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
 });
