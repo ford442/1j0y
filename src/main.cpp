@@ -134,15 +134,15 @@ const button7 = document.querySelector('#button7');
 axis0.addEventListener('onchange',function(){
 var axi = categorizeValue(axis0.innerHTML);
 ws.send(JSON.stringify({ type: 'joystick', index: 0, value: axi }));
-}
+});
 axis1.addEventListener('onchange',function(){
 var axi = categorizeValue(axis1.innerHTML);
 ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
-}
+});
 button0.addEventListener('onchange',function(){
 var btn = categorizeValue(button0.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
-}
+});
 button1.addEventListener('onchange',function(){
 var btn = categorizeValue(button1.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
@@ -150,27 +150,27 @@ ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
 button2.addEventListener('onchange',function(){
 var btn = categorizeValue(button2.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 2, value: btn }));
-}
+});
 button3.addEventListener('onchange',function(){
 var btn = categorizeValue(button3.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 3, value: btn }));
-}
+});
 button4.addEventListener('onchange',function(){
 var btn = categorizeValue(button4.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 4, value: btn }));
-}
+});
 button5.addEventListener('onchange',function(){
 var btn = categorizeValue(button5.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 5, value: btn }));
-}
+});
 button6.addEventListener('onchange',function(){
 var btn = categorizeValue(button6.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 6, value: btn }));
-}
+});
 button7.addEventListener('onchange',function(){
 var btn = categorizeValue(button7.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
-}
+});
 
 function normalResStart(){
 
