@@ -54,7 +54,7 @@ void mainloop()
           if ($0===0){
           document.querySelector('#axis0').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#axis1').innerHTML=$1;
           }
           }, j, ge.axis[j]);
@@ -71,25 +71,25 @@ void mainloop()
           if ($0===0){
           document.querySelector('#button0').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button1').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button2').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button3').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button4').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button5').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button6').innerHTML=$1;
           }
-          if ($1===1){
+          if ($0===1){
           document.querySelector('#button7').innerHTML=$1;
           }
           }, j, ge.analogButton[j]);
