@@ -48,20 +48,52 @@ void mainloop()
       {
         if (ge.axis[j] != prevState[g].axis[j])
           printf("Gamepad %d, axis %d: %g\n", g, j, ge.axis[j]);
+
+        //  ADD AXIS
+        EM_ASM({
+          if ($0==0){
+          document.querySelector('#axis0).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#axis1).innerHTML=$1;
+          }
+          }, j, ge.axis[j]);
+        
       }
 
       for(int j = 0; j < ge.numButtons; ++j)
       {
         if (ge.analogButton[j] != prevState[g].analogButton[j] || ge.digitalButton[j] != prevState[g].digitalButton[j])
           printf("Gamepad %d, button %d: Digital: %d, Analog: %g\n", g, j, ge.digitalButton[j], ge.analogButton[j]);
-          
-                EM_ASM({
-                console.log('websocket sends: ',$0,' pressed.');
-          // Send button press event to Node.js server using WebSockets
-          const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
-          ws.send(JSON.stringify({ type: 'button', index: $0, pressed: true })); 
-        }, i); // Pass the button index (i) to the JavaScript code
-      
+
+        //  ADD BUTTON
+          EM_ASM({
+          if ($0==0){
+          document.querySelector('#button0).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button1).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button2).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button3).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button4).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button5).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button6).innerHTML=$1;
+          }
+          if ($1==1){
+          document.querySelector('#button7).innerHTML=$1;
+          }
+          }, j, ge.analogButton[j]);
+        
       }
       prevState[g] = ge;
     }
@@ -72,7 +104,6 @@ void mainloop()
 EM_JS(void,js_main,(),{
 
 "use strict";
-
 
 function normalResStart(){
 
