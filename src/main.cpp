@@ -64,36 +64,36 @@ void mainloop()
 
         //  ADD BUTTON
           EM_ASM({
-          if ($0==0){
+          if ($0==0&&$1!=document.querySelector('#button0').innerHTML){
           console.log('btn 0');
           document.querySelector('#button0').innerHTML=$1;
           document.querySelector('#button0').click();
           }
-          if ($0==1){
+          if ($0==1&&$1!=document.querySelector('#button1').innerHTML){
           document.querySelector('#button1').innerHTML=$1;
           document.querySelector('#button1').click();
           }
-          if ($0==2){
+          if ($0==2&&$1!=document.querySelector('#button2').innerHTML){
           document.querySelector('#button2').innerHTML=$1;
           document.querySelector('#button2').click();
           }
-          if ($0==3){
+          if ($0==3&&$1!=document.querySelector('#button3').innerHTML){
           document.querySelector('#button3').innerHTML=$1;
           document.querySelector('#button3').click();
           }
-          if ($0==4){
+          if ($0==4&&$1!=document.querySelector('#button4').innerHTML){
           document.querySelector('#button4').innerHTML=$1;
           document.querySelector('#button4').click();
           }
-          if ($0==5){
+          if ($0==5&&$1!=document.querySelector('#button5').innerHTML){
           document.querySelector('#button5').innerHTML=$1;
           document.querySelector('#button5').click();
           }
-          if ($0===6){
+          if ($0==6&&$1!=document.querySelector('#button6').innerHTML){
           document.querySelector('#button6').innerHTML=$1;
           document.querySelector('#button6').click();
           }
-          if ($0==7){
+          if ($0==7&&$1!=document.querySelector('#button7').innerHTML){
           document.querySelector('#button7').innerHTML=$1;
           document.querySelector('#button7').click();
           }
