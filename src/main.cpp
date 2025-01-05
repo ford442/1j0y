@@ -40,7 +40,7 @@ void mainloop()
       int g = ge.index;
       for(int j = 0; j < ge.numAxes; ++j)
       {
-        if (ge.axis[j] - prevState[g].axis[j] > 0.1)
+        if (ge.axis[j] != prevState[g].axis[j])
           printf("Gamepad %d, axis %d: %g\n", g, j, ge.axis[j]);
 
         //  ADD AXIS
@@ -56,6 +56,7 @@ void mainloop()
           }, j, ge.axis[j]);
       
               }
+
       for(int j = 0; j < ge.numButtons; ++j)
       {
         if (ge.analogButton[j] != prevState[g].analogButton[j] || ge.digitalButton[j] != prevState[g].digitalButton[j])
