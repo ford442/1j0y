@@ -63,7 +63,7 @@ void mainloop()
 
         //  ADD BUTTON
           EM_ASM({
-          if ($0===0){
+          if ($0===10){
           console.log('btn 0');
           document.querySelector('#button0').innerHTML=$1;
           document.querySelector('#button0').click();
@@ -147,7 +147,7 @@ ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
 });
 button0.addEventListener('click',function(){
 var btn = categorizeValue(button0.innerHTML);
-ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
+ws.send(JSON.stringify({ type: 'button', index: 10, value: btn }));
 });
 button1.addEventListener('click',function(){
 var btn = categorizeValue(button1.innerHTML);
