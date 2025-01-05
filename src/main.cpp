@@ -40,7 +40,7 @@ void mainloop()
       int g = ge.index;
       for(int j = 0; j < ge.numAxes; ++j)
       {
-        if (ge.axis[j] != prevState[g].axis[j])
+        if (ge.axis[j] - prevState[g].axis[j] > 0.1)
           printf("Gamepad %d, axis %d: %g\n", g, j, ge.axis[j]);
 
         //  ADD AXIS
