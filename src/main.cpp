@@ -64,6 +64,7 @@ void mainloop()
         //  ADD BUTTON
           EM_ASM({
           if ($0===0){
+          console.log('btn 0');
           document.querySelector('#button0').innerHTML=$1;
           document.querySelector('#button0').click();
           }
