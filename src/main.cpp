@@ -45,11 +45,11 @@ void mainloop()
 
         //  ADD AXIS
         EM_ASM({
-          if ($0===0&&$1!=document.querySelector('#axis0').innerHTML){
+          if ($0===0) // && $1!=document.querySelector('#axis0').innerHTML){
           document.querySelector('#axis0').innerHTML=$1;
           document.querySelector('#axis0').click();
           }}
-          if ($0===1&&$1!=document.querySelector('#axis1').innerHTML){
+          if ($0===1) // && $1!=document.querySelector('#axis1').innerHTML){
           document.querySelector('#axis1').innerHTML=$1;
           document.querySelector('#axis1').click();
           }
