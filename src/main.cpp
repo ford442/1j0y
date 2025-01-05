@@ -63,28 +63,28 @@ void mainloop()
 
         //  ADD BUTTON
           EM_ASM({
-          if ($0===10){
+          if ($0==0){
           console.log('btn 0');
           document.querySelector('#button0').innerHTML=$1;
           document.querySelector('#button0').click();
           }
-          if ($0===1){
+          if ($0==1){
           document.querySelector('#button1').innerHTML=$1;
           document.querySelector('#button1').click();
           }
-          if ($0===2){
+          if ($0==2){
           document.querySelector('#button2').innerHTML=$1;
           document.querySelector('#button2').click();
           }
-          if ($0===3){
+          if ($0==3){
           document.querySelector('#button3').innerHTML=$1;
           document.querySelector('#button3').click();
           }
-          if ($0===4){
+          if ($0==4){
           document.querySelector('#button4').innerHTML=$1;
           document.querySelector('#button4').click();
           }
-          if ($0===5){
+          if ($0==5){
           document.querySelector('#button5').innerHTML=$1;
           document.querySelector('#button5').click();
           }
@@ -92,7 +92,7 @@ void mainloop()
           document.querySelector('#button6').innerHTML=$1;
           document.querySelector('#button6').click();
           }
-          if ($0===7){
+          if ($0==7){
           document.querySelector('#button7').innerHTML=$1;
           document.querySelector('#button7').click();
           }
@@ -147,7 +147,7 @@ ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
 });
 button0.addEventListener('click',function(){
 var btn = categorizeValue(button0.innerHTML);
-ws.send(JSON.stringify({ type: 'button', index: 10, value: btn }));
+ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
 });
 button1.addEventListener('click',function(){
 var btn = categorizeValue(button1.innerHTML);
