@@ -178,6 +178,7 @@ var btn = categorizeValue(button7.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
 });
 },420);
+  
 function normalResStart(){
 
 }
