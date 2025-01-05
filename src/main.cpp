@@ -54,6 +54,7 @@ void mainloop()
           document.querySelector('#axis1').click();
           }
           }, j, ge.axis[j]);
+      
               }
       for(int j = 0; j < ge.numButtons; ++j)
       {
@@ -108,7 +109,6 @@ EM_JS(void,js_main,(),{
 "use strict";
   
 const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
-
 function categorizeValue(elementValue) {
   const num = parseFloat(elementValue);
   if (Math.abs(num - (-1)) < 0.05) {  // Check for "near -1"
@@ -133,6 +133,8 @@ const button4 = document.querySelector('#button4');
 const button5 = document.querySelector('#button5');
 const button6 = document.querySelector('#button6');
 const button7 = document.querySelector('#button7');
+
+setTimeout(function(){
 
 axis0.addEventListener('click',function(){
 var axi = categorizeValue(axis0.innerHTML);
@@ -174,7 +176,7 @@ button7.addEventListener('click',function(){
 var btn = categorizeValue(button7.innerHTML);
 ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
 });
-
+},420);
 function normalResStart(){
 
 }
