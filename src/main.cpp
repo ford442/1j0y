@@ -1,19 +1,15 @@
 #include "../include/main.hpp"
 #include <stdio.h>
 
-
 EM_BOOL gamepad_callback(int eventType, const EmscriptenGamepadEvent *e, void *userData)
 {
-
   if (e->connected)
   {
     for(int i = 0; i < e->numAxes; ++i)
       printf("Axis %d: %g\n", i, e->axis[i]);
-
     for(int i = 0; i < e->numButtons; ++i)
       printf("Button %d: Digital: %d, Analog: %g\n", i, e->digitalButton[i], e->analogButton[i]);
   }
-
   return 0;
 }
 
@@ -29,14 +25,12 @@ void mainloop()
     emscripten_cancel_main_loop();
     return;
   }
-
   int numGamepads = emscripten_get_num_gamepads();
   if (numGamepads != prevNumGamepads)
   {
     printf("Number of connected gamepads: %d\n", numGamepads);
     prevNumGamepads = numGamepads;
   }
-
   for(int i = 0; i < numGamepads && i < 32; ++i)
   {
     EmscriptenGamepadEvent ge;
@@ -48,12 +42,63 @@ void mainloop()
       {
         if (ge.axis[j] != prevState[g].axis[j])
           printf("Gamepad %d, axis %d: %g\n", g, j, ge.axis[j]);
-      }
+
+        //  ADD AXIS
+        EM_ASM({
+          if ($0===0 && $1!=document.querySelector('#axis0').innerHTML){
+          document.querySelector('#axis0').innerHTML=$1;
+          document.querySelector('#axis0').click();
+          }
+          if ($0===1 && $1!=document.querySelector('#axis1').innerHTML){
+          document.querySelector('#axis1').innerHTML=$1;
+          document.querySelector('#axis1').click();
+          }
+          }, j, ge.axis[j]);
+      
+              }
 
       for(int j = 0; j < ge.numButtons; ++j)
       {
         if (ge.analogButton[j] != prevState[g].analogButton[j] || ge.digitalButton[j] != prevState[g].digitalButton[j])
           printf("Gamepad %d, button %d: Digital: %d, Analog: %g\n", g, j, ge.digitalButton[j], ge.analogButton[j]);
+
+        //  ADD BUTTON
+          EM_ASM({
+          if ($0==0&&$1!=document.querySelector('#button0').innerHTML){
+          console.log('btn 0');
+          document.querySelector('#button0').innerHTML=$1;
+          document.querySelector('#button0').click();
+          }
+          if ($0==1&&$1!=document.querySelector('#button1').innerHTML){
+          document.querySelector('#button1').innerHTML=$1;
+          document.querySelector('#button1').click();
+          }
+          if ($0==2&&$1!=document.querySelector('#button2').innerHTML){
+          document.querySelector('#button2').innerHTML=$1;
+          document.querySelector('#button2').click();
+          }
+          if ($0==3&&$1!=document.querySelector('#button3').innerHTML){
+          document.querySelector('#button3').innerHTML=$1;
+          document.querySelector('#button3').click();
+          }
+          if ($0==4&&$1!=document.querySelector('#button4').innerHTML){
+          document.querySelector('#button4').innerHTML=$1;
+          document.querySelector('#button4').click();
+          }
+          if ($0==5&&$1!=document.querySelector('#button5').innerHTML){
+          document.querySelector('#button5').innerHTML=$1;
+          document.querySelector('#button5').click();
+          }
+          if ($0==6&&$1!=document.querySelector('#button6').innerHTML){
+          document.querySelector('#button6').innerHTML=$1;
+          document.querySelector('#button6').click();
+          }
+          if ($0==7&&$1!=document.querySelector('#button7').innerHTML){
+          document.querySelector('#button7').innerHTML=$1;
+          document.querySelector('#button7').click();
+          }
+          }, j, ge.analogButton[j]);
+        
       }
       prevState[g] = ge;
     }
@@ -64,7 +109,77 @@ void mainloop()
 EM_JS(void,js_main,(),{
 
 "use strict";
+  
+const ws = new WebSocket('ws://localhost:3000'); // Replace with your server address
+function categorizeValue(elementValue) {
+  const num = parseFloat(elementValue);
+  if (Math.abs(num - (-1)) < 0.05) {  // Check for "near -1"
+    return -1;
+  } else if (Math.abs(num) < 0.05) {  // Check for "near 0"
+    return 0;
+  } else if (Math.abs(num - 1) < 0.05) {  // Check for "near 1"
+    return 1;
+  } else {
+    return null; // Or handle other cases as needed
+  }
+}
 
+const axis0 = document.querySelector('#axis0');
+const axis1 = document.querySelector('#axis1');
+
+const button0 = document.querySelector('#button0');
+const button1 = document.querySelector('#button1');
+const button2 = document.querySelector('#button2');
+const button3 = document.querySelector('#button3');
+const button4 = document.querySelector('#button4');
+const button5 = document.querySelector('#button5');
+const button6 = document.querySelector('#button6');
+const button7 = document.querySelector('#button7');
+
+setTimeout(function(){
+
+axis0.addEventListener('click',function(){
+var axi = categorizeValue(axis0.innerHTML);
+ws.send(JSON.stringify({ type: 'joystick', index: 0, value: axi }));
+});
+axis1.addEventListener('click',function(){
+var axi = categorizeValue(axis1.innerHTML);
+ws.send(JSON.stringify({ type: 'joystick', index: 1, value: axi }));
+});
+button0.addEventListener('click',function(){
+var btn = categorizeValue(button0.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 0, value: btn }));
+});
+button1.addEventListener('click',function(){
+var btn = categorizeValue(button1.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 1, value: btn }));
+});
+button2.addEventListener('click',function(){
+var btn = categorizeValue(button2.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 2, value: btn }));
+});
+button3.addEventListener('click',function(){
+var btn = categorizeValue(button3.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 3, value: btn }));
+});
+button4.addEventListener('click',function(){
+var btn = categorizeValue(button4.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 4, value: btn }));
+});
+button5.addEventListener('click',function(){
+var btn = categorizeValue(button5.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 5, value: btn }));
+});
+button6.addEventListener('click',function(){
+var btn = categorizeValue(button6.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 6, value: btn }));
+});
+button7.addEventListener('click',function(){
+var btn = categorizeValue(button7.innerHTML);
+ws.send(JSON.stringify({ type: 'button', index: 7, value: btn }));
+});
+},420);
+  
 function normalResStart(){
 
 }
@@ -109,8 +224,8 @@ tem.innerHTML=$ll;
 setTimeout(function(){
 slt=tem.innerHTML;
 },8);
-},16)
-;});
+},16);
+});
 
 document.getElementById('startBtn').addEventListener('click',function(){
 normalResStart();
