@@ -1,14 +1,6 @@
 # Dependencies
 node_modules/
 
-# Build outputs
-dist/
-*.js
-*.wasm
-!vite.config.js
-!js/rSlider.js
-!js/slideOut.js
-
 # Logs
 npm-debug.log*
 yarn-debug.log*
@@ -27,3 +19,7 @@ yarn-error.log*
 # Temporary files
 *.tmp
 .cache/
+
+# Example files (for testing only)
+example.html
+example.js
