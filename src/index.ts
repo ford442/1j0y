@@ -5,6 +5,10 @@
  * with event-driven API and optional WebSocket communication.
  */
 
+// Import the WASM module factory - this will be the Emscripten-generated module
+// @ts-ignore - WASM module is generated at build time
+import create1j0yModule from '../dist/1j0y.js';
+
 // Type definitions for the WASM module
 export interface WasmModule extends EmscriptenModule {
   _initJoystick(): number;
@@ -131,9 +135,7 @@ export class JoystickHandler {
    * Initialize the joystick handler and WASM module
    */
   async init(): Promise<void> {
-    // Dynamically import the WASM module
-    const create1j0yModule = (await import('./wasm-loader')).default;
-    
+    // Load the WASM module
     this.module = await create1j0yModule() as WasmModule;
     
     const result = this.module._initJoystick();
@@ -197,6 +199,7 @@ export class JoystickHandler {
 
   /**
    * Start polling for joystick input
+   * Note: Uses browser APIs (window.setInterval) as this library is designed for web environments
    */
   start(): void {
     if (this.isRunning) {

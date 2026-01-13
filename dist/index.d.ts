@@ -110,6 +110,7 @@ export declare class JoystickHandler {
     onButtonChange(callback: (event: ButtonChangeEvent) => void): void;
     /**
      * Start polling for joystick input
+     * Note: Uses browser APIs (window.setInterval) as this library is designed for web environments
      */
     start(): void;
     /**
