@@ -15,7 +15,7 @@ export interface WasmModule extends EmscriptenModule {
   _getButtonPressed(gamepadIndex: number, buttonIndex: number): number;
   _getNumAxes(gamepadIndex: number): number;
   _getNumButtons(gamepadIndex: number): number;
-  _cleanup(): void;
+  _cleanupJoystick(): void;
 }
 
 /**
@@ -372,7 +372,7 @@ export class JoystickHandler {
     }
 
     if (this.module) {
-      this.module._cleanup();
+      this.module._cleanupJoystick();
       this.module = null;
     }
 

@@ -21,6 +21,10 @@ EM_BOOL gamepad_callback(int eventType, const EmscriptenGamepadEvent *e, void *u
   return 0;
 }
 
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Initialize joystick system
 EMSCRIPTEN_KEEPALIVE
 int initJoystick()
@@ -172,10 +176,14 @@ int getNumButtons(int gamepadIndex)
 
 // Cleanup joystick system
 EMSCRIPTEN_KEEPALIVE
-void cleanup()
+void cleanupJoystick()
 {
   isInitialized = 0;
   prevNumGamepads = 0;
   memset(prevState, 0, sizeof(prevState));
   printf("Joystick system cleaned up\n");
 }
+
+#ifdef __cplusplus
+}
+#endif
