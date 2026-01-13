@@ -675,7 +675,7 @@ class re {
   }
   /**
    * Start polling for joystick input
-   * Note: Uses browser APIs (window.setInterval) as this library is designed for web environments
+   * Note: This library is designed for web environments with browser APIs
    */
   start() {
     if (this.isRunning) {
@@ -684,7 +684,7 @@ class re {
     }
     if (!this.module)
       throw new Error("Module not initialized. Call init() first.");
-    this.isRunning = !0, this.pollingIntervalId = window.setInterval(() => {
+    this.isRunning = !0, this.pollingIntervalId = setInterval(() => {
       this.poll();
     }, this.config.pollingInterval);
   }

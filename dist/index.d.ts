@@ -1,20 +1,6 @@
-/**
- * 1j0y - WebAssembly Joystick Input Library
- *
- * A TypeScript wrapper for joystick/gamepad input using WebAssembly (Emscripten)
- * with event-driven API and optional WebSocket communication.
- */
-export interface WasmModule extends EmscriptenModule {
-    _initJoystick(): number;
-    _pollGamepad(): number;
-    _getNumGamepads(): number;
-    _getAxisValue(gamepadIndex: number, axisIndex: number): number;
-    _getButtonValue(gamepadIndex: number, buttonIndex: number): number;
-    _getButtonPressed(gamepadIndex: number, buttonIndex: number): number;
-    _getNumAxes(gamepadIndex: number): number;
-    _getNumButtons(gamepadIndex: number): number;
-    _cleanupJoystick(): void;
-}
+import { WasmModule } from './wasm-module';
+
+export type { WasmModule };
 /**
  * Joystick/Gamepad axis change event
  */
@@ -110,7 +96,7 @@ export declare class JoystickHandler {
     onButtonChange(callback: (event: ButtonChangeEvent) => void): void;
     /**
      * Start polling for joystick input
-     * Note: Uses browser APIs (window.setInterval) as this library is designed for web environments
+     * Note: This library is designed for web environments with browser APIs
      */
     start(): void;
     /**

@@ -5,22 +5,13 @@
  * with event-driven API and optional WebSocket communication.
  */
 
-// Import the WASM module factory - this will be the Emscripten-generated module
-// @ts-ignore - WASM module is generated at build time
+// Import the WASM module factory
+// The module is built to dist/1j0y.js by the Makefile before TypeScript compilation
 import create1j0yModule from '../dist/1j0y.js';
+import type { WasmModule } from './wasm-module';
 
-// Type definitions for the WASM module
-export interface WasmModule extends EmscriptenModule {
-  _initJoystick(): number;
-  _pollGamepad(): number;
-  _getNumGamepads(): number;
-  _getAxisValue(gamepadIndex: number, axisIndex: number): number;
-  _getButtonValue(gamepadIndex: number, buttonIndex: number): number;
-  _getButtonPressed(gamepadIndex: number, buttonIndex: number): number;
-  _getNumAxes(gamepadIndex: number): number;
-  _getNumButtons(gamepadIndex: number): number;
-  _cleanupJoystick(): void;
-}
+// Re-export the WasmModule type for external use
+export type { WasmModule };
 
 /**
  * Joystick/Gamepad axis change event
@@ -199,7 +190,7 @@ export class JoystickHandler {
 
   /**
    * Start polling for joystick input
-   * Note: Uses browser APIs (window.setInterval) as this library is designed for web environments
+   * Note: This library is designed for web environments with browser APIs
    */
   start(): void {
     if (this.isRunning) {
@@ -212,9 +203,10 @@ export class JoystickHandler {
     }
 
     this.isRunning = true;
-    this.pollingIntervalId = window.setInterval(() => {
+    // Use setInterval (available in browser and modern Node.js)
+    this.pollingIntervalId = setInterval(() => {
       this.poll();
-    }, this.config.pollingInterval);
+    }, this.config.pollingInterval) as unknown as number;
   }
 
   /**
